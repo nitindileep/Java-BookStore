@@ -90,4 +90,18 @@ public class BookDAO {
 
         return false;
     }
+    
+    public boolean deleteBook(int id) {
+    	boolean status = false;
+    	String sql = "DELETE FROM book WHERE id = ?";
+    	try {
+    		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+    		statement.setInt(1, id);
+    		status = statement.executeUpdate() > 0;
+    		statement.close();
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return status;
+    }
 }
